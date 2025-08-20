@@ -158,24 +158,24 @@ export interface HeroSliceDefaultPrimary {
   logo: prismic.ImageField<never>;
 
   /**
-   * Title field in *Hero → Default → Primary*
+   * Heading field in *Hero → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **API ID Path**: hero.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  title: prismic.KeyTextField;
+  heading: prismic.RichTextField;
 
   /**
    * Body field in *Hero → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: hero.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  body: prismic.KeyTextField;
+  body: prismic.RichTextField;
 }
 
 /**

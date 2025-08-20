@@ -3,11 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"title": {
-				"__TYPE__": "FieldContent",
-				"value": "pet",
-				"type": "Text"
-			},
 			"logo": {
 				"origin": {
 					"id": "main",
@@ -31,10 +26,27 @@
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Rhyme"
+						}
+					}
+				]
+			},
 			"body": {
-				"__TYPE__": "FieldContent",
-				"value": "fellow",
-				"type": "Text"
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Laboris sint sunt id labore sit. Quis reprehenderit magna cillum eiusmod amet sunt aute."
+						}
+					}
+				]
 			}
 		},
 		"items": []
