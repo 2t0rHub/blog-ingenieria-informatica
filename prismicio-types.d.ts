@@ -146,6 +146,16 @@ export type PageDocument<Lang extends string = string> =
  */
 export interface SettingsDocumentDataNavigationItem {
   /**
+   * Label field in *Settings → Navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.navigation[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
    * Link field in *Settings → Navigation*
    *
    * - **Field Type**: Link
