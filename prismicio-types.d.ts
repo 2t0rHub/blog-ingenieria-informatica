@@ -102,6 +102,17 @@ interface LogDocumentData {
   heading: prismic.RichTextField;
 
   /**
+   * Description field in *Log*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
    * Author field in *Log*
    *
    * - **Field Type**: Rich Text

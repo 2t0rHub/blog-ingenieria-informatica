@@ -1,9 +1,16 @@
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName } from "@/prismicio";
-import "./globals.css";
+import { createClient } from "@/prismicio";
+import { JetBrains_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { createClient } from "@/prismicio";
+import "./globals.css";
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
+});
 
 export default async function RootLayout({
   children,
@@ -14,7 +21,7 @@ export default async function RootLayout({
   const settings = await client.getSingle("settings");
 
   return (
-    <html lang="es">
+    <html lang="es" className={jetBrainsMono.className}>
       <body>
         <Header />
         {children}

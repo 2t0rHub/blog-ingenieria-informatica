@@ -35,7 +35,7 @@ const Logs = async ({ slice }: LogsProps) => {
       data-slice-variation={slice.variation}
       className="py-12 md:py-20"
     >
-      <div className="text-center mb-12">
+      <div className="flex flex-col items-center justify-center text-center mb-12">
         <h2 className="max-w-2xl text-balance text-center text-4xl font-bold font-mono text-accent md:text-6xl mb-6">
           <PrismicText field={slice.primary.heading} />
         </h2>
@@ -130,10 +130,9 @@ const Logs = async ({ slice }: LogsProps) => {
                     )}
                   >
                     <div className="text-center">
-                      <div className="text-6xl mb-2">📝</div>
-                      <p className="text-sm text-foreground/60 font-mono">
-                        Log content preview
-                      </p>
+                      <div className="text-balance">
+                        <PrismicRichText field={log.data.description} />
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -21,6 +21,15 @@
           "single": "heading1"
         }
       },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph"
+        }
+      },
       "author": {
         "type": "StructuredText",
         "config": {
