@@ -1,0 +1,65 @@
+{
+  "id": "logs",
+  "type": "SharedSlice",
+  "name": "Logs",
+  "description": "Logs",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "logs": {
+          "type": "Group",
+          "config": {
+            "label": "Logs",
+            "repeat": true,
+            "fields": {
+              "log": {
+                "type": "Link",
+                "config": {
+                  "label": "Log",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "log",
+                      "fields": [
+                        "heading",
+                        "author",
+                        "publish_date",
+                        "reading_time"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -69,7 +69,107 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = HeroSlice | RichTextSlice;
+/**
+ * Item in *Log → Tags*
+ */
+export interface LogDocumentDataTagsItem {
+  /**
+   * Label field in *Log → Tags*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.tags[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+}
+
+type LogDocumentDataSlicesSlice = RichTextSlice;
+
+/**
+ * Content for Log documents
+ */
+interface LogDocumentData {
+  /**
+   * Heading field in *Log*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.heading
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Author field in *Log*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.author
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  author: prismic.RichTextField;
+
+  /**
+   * Publish Date field in *Log*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.publish_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  publish_date: prismic.DateField;
+
+  /**
+   * Tags field in *Log*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.tags[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  tags: prismic.GroupField<Simplify<LogDocumentDataTagsItem>>;
+
+  /**
+   * Reading Time field in *Log*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.reading_time
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  reading_time: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Log*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: log.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<LogDocumentDataSlicesSlice>;
+}
+
+/**
+ * Log document from Prismic
+ *
+ * - **API ID**: `log`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LogDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<LogDocumentData>, "log", Lang>;
+
+type PageDocumentDataSlicesSlice = LogsSlice | HeroSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -198,7 +298,7 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = PageDocument | SettingsDocument;
+export type AllDocumentTypes = LogDocument | PageDocument | SettingsDocument;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -261,6 +361,90 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Item in *Logs → Default → Primary → Logs*
+ */
+export interface LogsSliceDefaultPrimaryLogsItem {
+  /**
+   * Log field in *Logs → Default → Primary → Logs*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logs.default.primary.logs[].log
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  log: ContentRelationshipFieldWithData<
+    [
+      {
+        id: "log";
+        fields: ["heading", "author", "publish_date", "reading_time"];
+      },
+    ]
+  >;
+}
+
+/**
+ * Primary content in *Logs → Default → Primary*
+ */
+export interface LogsSliceDefaultPrimary {
+  /**
+   * Heading field in *Logs → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logs.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Body field in *Logs → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logs.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Logs field in *Logs → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logs.default.primary.logs[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  logs: prismic.GroupField<Simplify<LogsSliceDefaultPrimaryLogsItem>>;
+}
+
+/**
+ * Default variation for Logs Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LogsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LogsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Logs*
+ */
+type LogsSliceVariation = LogsSliceDefault;
+
+/**
+ * Logs Shared Slice
+ *
+ * - **API ID**: `logs`
+ * - **Description**: Logs
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LogsSlice = prismic.SharedSlice<"logs", LogsSliceVariation>;
 
 /**
  * Primary content in *RichText → Default → Primary*
@@ -328,6 +512,10 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      LogDocument,
+      LogDocumentData,
+      LogDocumentDataTagsItem,
+      LogDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
@@ -339,6 +527,11 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      LogsSlice,
+      LogsSliceDefaultPrimaryLogsItem,
+      LogsSliceDefaultPrimary,
+      LogsSliceVariation,
+      LogsSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
