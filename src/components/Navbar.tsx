@@ -38,10 +38,10 @@ export default function NavBar({ settings }: NavBarProps) {
         <div className="flex items-center justify-between px-4 py-2">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="hover:scale-105 transition-transform">
-              <LogoMark className="w-10 h-10 p-1" />
+              <LogoMark className="w-15 h-15 p-1" />
             </div>
-            <span className="text-accent font-bold text-lg glow-text font-mono">
-              2t0rlogs
+            <span className="text-accent font-bold text-lg glow-text font-mono hover:scale-105 transition-transform">
+              {">_ "}2t0rlogs
             </span>
           </Link>
 

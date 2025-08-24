@@ -22,6 +22,11 @@ export default async function RootLayout({
 
   return (
     <html lang="es" className={jetBrainsMono.className}>
+      <script
+        async
+        defer
+        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=blog-ingenieria-informatica"
+      ></script>
       <body>
         <Header />
         {children}
