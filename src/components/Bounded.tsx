@@ -78,7 +78,7 @@ export default function Bounded({
       )}
     >
       {/* Fondo de caracteres aleatorios */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none">
+      <div className="absolute  bg-black/10 backdrop-blur-sm inset-0 w-full h-full pointer-events-none">
         {chars.map((c, i) => (
           <span
             key={`char-${i}`}

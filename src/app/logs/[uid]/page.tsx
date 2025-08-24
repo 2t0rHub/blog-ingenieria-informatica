@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
           {/* Log Header */}
           <div className="mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold font-mono text-accent mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold font-mono text-accent mb-6 neon-glow">
               <PrismicText field={log.data.heading} />
             </h1>
 

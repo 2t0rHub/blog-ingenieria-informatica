@@ -23,7 +23,7 @@ export default function NavBar({ settings }: NavBarProps) {
 
   return (
     <>
-      <nav className="terminal-window sticky top-0 z-50 mx-4 rounded-sm bg-black/10 backdrop-blur-sm">
+      <nav className="sticky top-0 z-50 mx-4 rounded-sm bg-black/10 backdrop-blur-sm border">
         {/* Header de ventana */}
         <div className="terminal-header py-1 px-3">
           <div className="terminal-controls">

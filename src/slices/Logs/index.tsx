@@ -6,10 +6,11 @@ import {
   PrismicText,
   SliceComponentProps,
 } from "@prismicio/react";
-import { Calendar, Clock, User, ArrowRight, Badge, Power } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Power } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 /**
  * Props for `Logs`.
@@ -81,13 +82,13 @@ const Logs = async ({ slice }: LogsProps) => {
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                      {log.tags.map((tag) => (
+                      {log.data.tags.map((tag, index) => (
                         <Badge
-                          key={tag}
-                          // variant="secondary"
+                          key={index}
+                          variant="secondary"
                           className="text-xs font-mono bg-accent/20 text-accent border-accent/30"
                         >
-                          #{tag}
+                          #{tag.label}
                         </Badge>
                       ))}
                     </div>
