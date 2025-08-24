@@ -220,11 +220,6 @@
     text-decoration: none;
   }
 
-  .file-item:hover {
-    background: var(--accent);
-    color: var(--accent-foreground);
-  }
-
   .file-icon {
     font-size: 1rem;
   }

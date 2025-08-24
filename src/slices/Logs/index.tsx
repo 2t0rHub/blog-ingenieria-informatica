@@ -6,9 +6,10 @@ import {
   PrismicText,
   SliceComponentProps,
 } from "@prismicio/react";
-import { Calendar, Clock, User, ArrowRight } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Badge, Power } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 /**
  * Props for `Logs`.
@@ -33,7 +34,7 @@ const Logs = async ({ slice }: LogsProps) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-12 md:py-20"
+      className="py-4 mb-4 md:py-8 "
     >
       <div className="flex flex-col items-center justify-center text-center mb-12">
         <h2 className="max-w-2xl text-balance text-center text-4xl font-bold font-mono text-accent md:text-6xl mb-6">
@@ -45,98 +46,70 @@ const Logs = async ({ slice }: LogsProps) => {
         </div>
       </div>
 
-      <div className="grid gap-8 md:gap-12">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {logs.map(
-          (log, index) =>
+          (log) =>
             log && (
-              <div
-                key={log.id}
-                className="terminal-window rounded-lg p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-1">
-                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    </div>
-                    <span className="text-sm text-muted-foreground font-mono">
-                      log - ~/2t0rlogs/{log.uid}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-                  <div className="col-span-1 flex flex-col justify-center gap-4">
-                    <div className="space-y-2">
-                      <h3 className="text-2xl md:text-3xl font-bold font-mono text-accent">
-                        <PrismicText field={log.data.heading} />
-                      </h3>
-
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-foreground/70 font-mono">
-                        <div className="flex items-center gap-1">
-                          <User className="w-4 h-4" />
-                          <PrismicText field={log.data.author} />
+              <Link key={log.uid} href={`/logs/${log.uid}`}>
+                <Card className="group hover:shadow-lg hover:shadow-accent/20 transition-all duration-300 border-border/50 hover:border-accent/50 terminal-window relative overflow-hidden cursor-pointer">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-accent"></div>
+                          <div className="w-2 h-2 rounded-full bg-muted"></div>
+                          <div className="w-2 h-2 rounded-full bg-muted"></div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {log.data.publish_date && (
-                            <span>
-                              {new Date(
-                                log.data.publish_date
-                              ).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              })}
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          <PrismicText field={log.data.reading_time} />
-                        </div>
+                        <span className="font-mono text-xs">
+                          log_{log.uid}.txt
+                        </span>
                       </div>
-
-                      {log.data.tags && log.data.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                          {log.data.tags.map((tag, tagIndex) => (
-                            <span
-                              key={tagIndex}
-                              className="px-2 py-1 text-xs font-mono bg-accent/10 text-accent rounded border border-accent/20"
-                            >
-                              #{tag.label}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                      <Power className="h-3 w-3 text-accent" />
+                    </div>
+                    <div className="font-mono text-xs text-muted-foreground mb-2">
+                      modified: {log.data.publish_date}
+                    </div>
+                    <CardTitle className="font-mono group-hover:text-accent transition-colors text-foreground">
+                      <PrismicRichText field={log.data.heading} />
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-muted-foreground leading-relaxed font-mono text-sm">
+                      <PrismicRichText field={log.data.description} />
                     </div>
 
-                    <Link
-                      href={`/logs/${log.uid}`}
-                      className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors duration-200 font-mono group"
-                    >
-                      <span className="file-icon">{">"}</span>
-                      Read full log
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                    </Link>
-                  </div>
+                    <div className="flex flex-wrap gap-2">
+                      {log.tags.map((tag) => (
+                        <Badge
+                          key={tag}
+                          // variant="secondary"
+                          className="text-xs font-mono bg-accent/20 text-accent border-accent/30"
+                        >
+                          #{tag}
+                        </Badge>
+                      ))}
+                    </div>
 
-                  <div
-                    className={clsx(
-                      "col-span-1 md:col-span-1 lg:col-span-2",
-                      "bg-gradient-to-br from-accent/5 to-accent/10 rounded-lg p-4 border border-accent/20",
-                      "flex items-center justify-center"
-                    )}
-                  >
-                    <div className="text-center">
-                      <div className="text-balance">
-                        <PrismicRichText field={log.data.description} />
+                    <div className="flex items-center justify-between pt-2 border-t border-border/50">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground font-mono">
+                        <User className="h-3 w-3" />
+                        <PrismicRichText
+                          field={log.data.author}
+                          components={{
+                            paragraph: ({ children }) => (
+                              <span>root@{children}</span>
+                            ),
+                          }}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground font-mono">
+                        <Clock className="h-3 w-3" />
+                        <PrismicRichText field={log.data.reading_time} />
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </CardContent>
+                </Card>
+              </Link>
             )
         )}
       </div>

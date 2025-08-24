@@ -48,7 +48,7 @@ export default function NavBar({ settings }: NavBarProps) {
               <li key={item.label}>
                 <PrismicNextLink
                   field={item.link}
-                  className="file-item text-foreground hover:text-accent"
+                  className="file-item text-foreground hover:text-accent x-40"
                 >
                   <span className="file-icon">/</span>
                   {item.label}
@@ -119,7 +119,7 @@ export default function NavBar({ settings }: NavBarProps) {
                   <li key={item.label}>
                     <PrismicNextLink
                       field={item.link}
-                      className="file-item text-foreground hover:text-accent block py-3 px-4 rounded transition-colors duration-200 hover:bg-accent/10"
+                      className="file-item text-foreground block py-3 px-4 rounded hover:text-accent"
                       onClick={closeMenu}
                     >
                       <span className="file-icon">/</span>

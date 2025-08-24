@@ -16,7 +16,7 @@ export default function Bounded({
   className,
   children,
   size = "lg",
-  withPadding = true,
+  withPadding = false,
 }: BoundedProps) {
   const containerRef = useRef<HTMLElement>(null);
   const charsRef = useRef<HTMLSpanElement[]>([]);
@@ -83,7 +83,7 @@ export default function Bounded({
         {chars.map((c, i) => (
           <span
             key={`char-${i}`}
-            ref={(el) => el && (charsRef.current[i] = el)}
+            ref={(el: any) => el && (charsRef.current[i] = el)}
             className="absolute"
             style={{
               left: `${c.x}%`,
@@ -105,7 +105,7 @@ export default function Bounded({
         className={cn(
           "relative mx-auto",
           sizeClasses[size],
-          withPadding && "px-4 py-8 md:px-6 md:py-12"
+          withPadding && "px-4 md:px-6"
         )}
       >
         {children}

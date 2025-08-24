@@ -23,7 +23,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-12 md:py-20 bg-gradient-to-b from-card/30 to-background"
+      className="py-4 md:py-8 bg-gradient-to-b from-card/30 to-background"
       size="lg"
     >
       <div className="max-w-4xl mx-auto text-center">
