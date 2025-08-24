@@ -41,8 +41,7 @@ export default function Bounded({
 
   // Generar caracteres aleatorios solo en cliente
   useEffect(() => {
-    const possibleChars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*";
+    const possibleChars = "2t0rlogs@#$%&*";
     const newChars = Array.from({ length: 80 }, () => ({
       char: possibleChars[Math.floor(Math.random() * possibleChars.length)],
       x: Math.random() * 100, // porcentaje
@@ -99,7 +98,6 @@ export default function Bounded({
           </span>
         ))}
       </div>
-
       {/* Contenido */}
       <div
         className={cn(

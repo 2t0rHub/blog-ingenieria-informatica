@@ -37,8 +37,10 @@ const Logs = async ({ slice }: LogsProps) => {
       className="py-4 mb-4 md:py-8 "
     >
       <div className="flex flex-col items-center justify-center text-center mb-12">
-        <h2 className="max-w-2xl text-balance text-center text-4xl font-bold font-mono text-accent md:text-6xl mb-6">
+        <h2 className="max-w-2xl text-balance text-center text-4xl font-bold font-mono text-accent md:text-6xl mb-6 neon-glow">
           <PrismicText field={slice.primary.heading} />
+          {""}
+          <span className="animate-blink">_</span>
         </h2>
 
         <div className="mx-auto max-w-md text-balance text-center text-foreground/70 font-mono">
