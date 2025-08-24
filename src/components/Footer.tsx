@@ -1,8 +1,16 @@
 import { Content } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
+import { Mail, Github, Linkedin, Instagram } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import LogoMark from "./LogoMark";
+
+const icons = {
+  github: <Github />,
+  linkedin: <Linkedin />,
+  mail: <Mail />,
+  instagram: <Instagram />,
+};
 
 type FooterProps = {
   settings: Content.SettingsDocument;
@@ -51,7 +59,7 @@ export default function Footer({ settings }: FooterProps) {
                     <li key={item.label}>
                       <PrismicNextLink
                         field={item.link}
-                        className="file-item text-foreground/80 hover:text-accent transition-colors duration-200 block py-1"
+                        className="flex file-item text-foreground/80 hover:text-accent transition-colors duration-200 py-1"
                       >
                         <span className="file-icon">{">"}</span>
                         {item.label}
@@ -65,36 +73,22 @@ export default function Footer({ settings }: FooterProps) {
             {/* Quick Links Section */}
             <div className="space-y-4">
               <h3 className="text-accent font-bold text-lg font-mono border-b border-accent/30 pb-2">
-                Quick Access
+                Socials
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/"
-                    className="file-item text-foreground/80 hover:text-accent transition-colors duration-200 block py-1"
-                  >
-                    <span className="file-icon">{">"}</span>
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about"
-                    className="file-item text-foreground/80 hover:text-accent transition-colors duration-200 block py-1"
-                  >
-                    <span className="file-icon">{">"}</span>
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="file-item text-foreground/80 hover:text-accent transition-colors duration-200 block py-1"
-                  >
-                    <span className="file-icon">{">"}</span>
-                    Contact
-                  </Link>
-                </li>
+                {settings.data.socials &&
+                  settings.data.socials.map(
+                    (item, index) =>
+                      item && (
+                        <li key={index}>
+                          <div className="flex file-item text-foreground/80 hover:text-accent transition-colors duration-200 py-1">
+                            <span className="file-icon">{"> "}</span>
+                            <PrismicNextLink field={item.link} />
+                            <>{item.icon && icons[item.icon]}</>
+                          </div>
+                        </li>
+                      )
+                  )}
               </ul>
             </div>
           </div>
