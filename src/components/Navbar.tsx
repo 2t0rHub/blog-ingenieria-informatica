@@ -36,13 +36,13 @@ export default function NavBar({ settings }: NavBarProps) {
 
         {/* Barra principal */}
         <div className="flex items-center justify-between px-4 py-2">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="hover:scale-105 transition-transform">
-              <LogoMark className="w-15 h-15 p-1" />
+          <Link href="/" className="">
+            <div className="gap-4 flex items-center align-bottom hover:scale-105 transition-transform">
+              <LogoMark className="w-10 h-10 md:w-15 md:h-15 p-1" />
+              <span className="text-accent font-bold text-lg glow-text font-mono  ">
+                {">_ "}2t0rlogs
+              </span>
             </div>
-            <span className="text-accent font-bold text-lg glow-text font-mono hover:scale-105 transition-transform">
-              {">_ "}2t0rlogs
-            </span>
           </Link>
 
           <ul className="hidden md:flex items-center gap-2">
