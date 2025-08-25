@@ -69,9 +69,20 @@ const Logs = async ({ slice }: LogsProps) => {
                       <Power className="h-3 w-3 text-accent" />
                     </div>
                     <div className="font-mono text-xs text-muted-foreground mb-2">
-                      modified: {log.data.publish_date}
+                      {/* Format the date to DD/MM/YYYY */}
+                      modified:{" "}
+                      {log.data.publish_date
+                        ? new Date(log.data.publish_date).toLocaleDateString(
+                            "es-ES",
+                            {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                            }
+                          )
+                        : "unknown"}
                     </div>
-                    <CardTitle className="font-mono group-hover:text-accent transition-colors text-foreground">
+                    <CardTitle className="font-mono group-hover:text-accent transition-colors text-foreground glow-text">
                       <PrismicRichText field={log.data.heading} />
                     </CardTitle>
                   </CardHeader>
@@ -104,7 +115,7 @@ const Logs = async ({ slice }: LogsProps) => {
                           }}
                         />
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground font-mono">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground font-mono glow-text">
                         <Clock className="h-3 w-3" />
                         <PrismicRichText field={log.data.reading_time} />
                       </div>
