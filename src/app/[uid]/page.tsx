@@ -9,12 +9,9 @@ import { components } from "@/slices";
 
 type Params = { uid: string };
 
-type PageProps = {
-  params: Params;
-};
-
-export default async function Page({ params }: PageProps) {
-  const { uid } = params;
+export default async function Page({ params }: { params: Promise<Params> }) {
+  // Desestructurar la Promise de params
+  const { uid } = await params;
   const client = createClient();
 
   // Obtener la página desde Prismic
@@ -26,8 +23,11 @@ export default async function Page({ params }: PageProps) {
 
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
-  const { uid } = params;
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  // Desestructurar la Promise de params
+  const { uid } = await params;
   const client = createClient();
   const page = await client.getByUID("page", uid).catch(() => notFound());
 
