@@ -1,10 +1,6 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import {
-  PrismicRichText,
-  PrismicText,
-  SliceComponentProps,
-} from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Terminal, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -41,7 +37,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             </div>
           </div>
 
-          
           <div className="text-left font-mono text-sm space-y-2 mb-6">
             <div className="text-accent">$ whoami</div>
             <div className="text-muted-foreground">

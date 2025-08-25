@@ -12,9 +12,7 @@ type Params = { uid: string };
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
   const client = createClient();
-  const log = (await (client as any)
-    .getByUID("log", uid)
-    .catch(() => notFound())) as any;
+  const log = await client.getByUID("log", uid).catch(() => notFound());
 
   return (
     <Bounded as="article" className="py-12 md:py-20">
@@ -70,7 +68,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             {/* Tags */}
             {log.data.tags && log.data.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {log.data.tags.map((tag: any, index: number) => (
+                {log.data.tags.map((tag, index: number) => (
                   <span
                     key={index}
                     className="px-3 py-1 text-sm font-mono bg-accent/10 text-accent rounded-full border border-accent/20 flex items-center gap-1"
@@ -99,9 +97,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { uid } = await params;
   const client = createClient();
-  const log = (await (client as any)
-    .getByUID("log", uid)
-    .catch(() => notFound())) as any;
+  const log = await client.getByUID("log", uid).catch(() => notFound());
 
   const heading = asText(log.data.heading) || "Log";
   const author = asText(log.data.author) || "Unknown Author";
@@ -121,9 +117,9 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const client = createClient();
-  const logs = await (client as any).getAllByType("log");
+  const logs = await client.getAllByType("log");
 
-  return logs.map((log: any) => {
+  return logs.map((log) => {
     return { uid: log.uid };
   });
 }

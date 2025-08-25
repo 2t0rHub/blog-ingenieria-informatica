@@ -6,9 +6,8 @@ import {
   PrismicText,
   SliceComponentProps,
 } from "@prismicio/react";
-import { Calendar, Clock, User, ArrowRight, Power } from "lucide-react";
+import { Clock, User, Power } from "lucide-react";
 import Link from "next/link";
-import clsx from "clsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 

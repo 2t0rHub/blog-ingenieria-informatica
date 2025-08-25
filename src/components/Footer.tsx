@@ -55,7 +55,7 @@ export default function Footer({ settings }: FooterProps) {
               </h3>
               <nav>
                 <ul className="space-y-2">
-                  {settings.data.navigation.map((item: any) => (
+                  {settings.data.navigation.map((item) => (
                     <li key={item.label}>
                       <PrismicNextLink
                         field={item.link}
