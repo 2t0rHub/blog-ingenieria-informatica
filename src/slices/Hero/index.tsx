@@ -41,6 +41,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             </div>
           </div>
 
+          
           <div className="text-left font-mono text-sm space-y-2 mb-6">
             <div className="text-accent">$ whoami</div>
             <div className="text-muted-foreground">

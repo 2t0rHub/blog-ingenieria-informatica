@@ -1,7 +1,5 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
-import { gsap } from "gsap";
 
 type BoundedProps = {
   as?: React.ElementType;
@@ -18,19 +16,15 @@ export default function Bounded({
   size = "lg",
   withPadding = false,
 }: BoundedProps) {
-  const containerRef = useRef<HTMLElement>(null);
-  const charsRef = useRef<HTMLSpanElement[]>([]);
-
-  const [chars, setChars] = useState<
-    {
-      char: string;
-      x: number;
-      y: number;
-      size: number;
-      rotate: number;
-      animate: boolean;
-    }[]
-  >([]);
+  // Generar caracteres aleatorios en el servidor
+  const possibleChars = "2t0rlogs@#$%&*";
+  const chars = Array.from({ length: 80 }, () => ({
+    char: possibleChars[Math.floor(Math.random() * possibleChars.length)],
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: 10 + Math.random() * 12,
+    rotate: (Math.random() - 0.5) * 20,
+  }));
 
   const sizeClasses = {
     sm: "max-w-4xl",
@@ -39,50 +33,18 @@ export default function Bounded({
     xl: "max-w-7xl",
   };
 
-  // Generar caracteres aleatorios solo en cliente
-  useEffect(() => {
-    const possibleChars = "2t0rlogs@#$%&*";
-    const newChars = Array.from({ length: 80 }, () => ({
-      char: possibleChars[Math.floor(Math.random() * possibleChars.length)],
-      x: Math.random() * 100, // porcentaje
-      y: Math.random() * 100, // porcentaje
-      size: 10 + Math.random() * 12, // tamaño en px
-      rotate: (Math.random() - 0.5) * 20, // rotación entre -10 y 10 grados
-      animate: Math.random() < 0.2, // solo ~20% de los caracteres animados
-    }));
-    setChars(newChars);
-  }, []);
-
-  // Animación sutil solo en algunos caracteres
-  useEffect(() => {
-    const animatedChars = charsRef.current.filter((_, i) => chars[i]?.animate);
-    if (!animatedChars.length) return;
-
-    gsap.to(animatedChars, {
-      opacity: 0.2,
-      scale: 1.2,
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      stagger: { each: 0.2, from: "random" },
-    });
-  }, [chars]);
-
   return (
     <Comp
-      ref={containerRef}
       className={cn(
         "relative bg-black text-green-400 overflow-hidden",
         className
       )}
     >
       {/* Fondo de caracteres aleatorios */}
-      <div className="absolute  bg-black/10 backdrop-blur-sm inset-0 w-full h-full pointer-events-none">
+      <div className="absolute bg-black/10 backdrop-blur-sm inset-0 w-full h-full pointer-events-none">
         {chars.map((c, i) => (
           <span
             key={`char-${i}`}
-            ref={(el: any) => el && (charsRef.current[i] = el)}
             className="absolute"
             style={{
               left: `${c.x}%`,
@@ -98,6 +60,7 @@ export default function Bounded({
           </span>
         ))}
       </div>
+
       {/* Contenido */}
       <div
         className={cn(
